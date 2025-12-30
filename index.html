@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise for Bhondhuuuu🐷💗</title>
+    <style>
+        :root { --pink: #ff69b4; --dark: #0d0117; }
+        body { background: var(--dark); color: white; font-family: 'Arial', sans-serif; text-align: center; margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .screen { display: none; flex-direction: column; align-items: center; width: 90%; animation: fadeIn 0.5s ease; }
+        .active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        /* Heart Animation */
+        .heart-box { position: relative; width: 150px; height: 150px; display: flex; justify-content: center; align-items: center; margin: 20px; }
+        .heart { font-size: 80px; cursor: pointer; user-select: none; z-index: 10; transition: transform 0.2s; }
+        .ring { position: absolute; width: 120px; height: 120px; border: 5px solid rgba(255,105,180,0.2); border-top: 5px solid var(--pink); border-radius: 50%; display: none; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Card Swipe Logic */
+        .card-stack { position: relative; width: 280px; height: 180px; margin-top: 30px; }
+        .card { position: absolute; width: 100%; height: 100%; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-weight: bold; padding: 15px; box-sizing: border-box; cursor: pointer; transition: transform 0.5s, opacity 0.5s; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 2px solid rgba(255,255,255,0.2); }
+        .c1 { background: #ff4d4d; z-index: 3; } 
+        .c2 { background: #ff9f43; z-index: 2; transform: translateY(10px) scale(0.95); }
+        .c3 { background: #54a0ff; z-index: 1; transform: translateY(20px) scale(0.9); }
+
+        /* Golden Ticket */
+        .ticket { background: linear-gradient(45deg, #ffd700, #ff8c00); color: black; padding: 30px; border-radius: 15px; border: 2px dashed #b8860b; box-shadow: 0 0 30px gold; }
+        
+        button { background: var(--pink); color: white; border: none; padding: 12px 25px; border-radius: 25px; font-weight: bold; margin-top: 20px; cursor: pointer; box-shadow: 0 5px 15px rgba(255,105,180,0.4); }
+    </style>
+</head>
+<body>
+
+    <div id="s1" class="screen active">
+        <h2 style="color: var(--pink);">A little surprise for you</h2>
+        <p>Before this year begins</p>
+        <div class="heart-box">
+            <div id="ring" class="ring"></div>
+            <div id="heart" class="heart">❤️</div>
+        </div>
+        <p style="opacity: 0.7;">Tap and hold the heart</p>
+    </div>
+
+    <div id="s2" class="screen">
+        <h2>Something is waiting for you</h2>
+        <p>Move the little distractions aside</p>
+        <div class="card-stack">
+            <div class="card c1" onclick="pop(this)">Stress 😫  <br>(Tap to remove)</div>
+            <div class="card c2" onclick="pop(this)">Bad Days ☁️ <br>(Tap to remove)</div>
+            <div class="card c3" onclick="pop(this)">Distances 📍 <br>(Tap to remove)</div>
+            <div class="card c3" onclick="pop(this)">Tension 🎥📞<br>(Tap to remove)</div>
+        </div>
+    </div>
+
+    <div id="s3" class="screen">
+        <div class="ticket">
+            <h1 style="margin:0;">GOLDEN TICKET</h1>
+            <p>Valid for every day ahead</p>
+            <hr style="border: 1px dashed black;">
+            <h3>"Unlimited Love & Smiles"</h3>
+            <p>Reserved for: <b>Bhondhuuuu</b></p>
+        </div>
+        <button onclick="next(3,4)">CLAIM GIFT 🎁</button>
+    </div>
+
+    <div id="s4" class="screen">
+        <h2 style="color: var(--pink);">For my Bhondhuuuu💗👀</h2>
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; border: 1px solid var(--pink); line-height: 1.6;">
+            <p>I hope this year brings you calm mornings, peaceful nights, and little moments that make you smile without any reason.</p>
+            <p>No matter what this year holds, I hope you always feel supported, valued, and understood.</p>
+            <p><b>Wishing you a beautiful New Year! ✨</b></p>
+        </div>
+    </div>
+
+    <script>
+        let timer;
+        const heart = document.getElementById('heart');
+        const ring = document.getElementById('ring');
+
+        function start() {
+            ring.style.display = 'block';
+            timer = setTimeout(() => { next(1, 2); }, 1500);
+        }
+        function stop() {
+            clearTimeout(timer);
+            ring.style.display = 'none';
+        }
+
+        heart.addEventListener('mousedown', start);
+        heart.addEventListener('touchstart', start);
+        heart.addEventListener('mouseup', stop);
+        heart.addEventListener('touchend', stop);
+
+        let cardsPopped = 0;
+        function pop(el) {
+            el.style.transform = 'translateX(400px) rotate(30deg)';
+            el.style.opacity = '0';
+            cardsPopped++;
+            if(cardsPopped === 3) setTimeout(() => { next(2, 3); }, 500);
+        }
+
+        function next(hide, show) {
+            document.getElementById('s'+hide).classList.remove('active');
+            document.getElementById('s'+show).classList.add('active');
+        }
+    </script>
+</body>
+</html>
